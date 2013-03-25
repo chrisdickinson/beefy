@@ -2,7 +2,7 @@ module.exports = help
 
 function help() {
 /*
-browservefy path/to/entry.js[:as.js] [PORT] -- [arguments to forward to browserify command]
+beefy path/to/entry.js[:as.js] [PORT] -- [arguments to forward to browserify command]
 
   Spins up a development server on ``http://localhost:PORT`` for working with static 
   files and browserifiable JavaScript modules.
