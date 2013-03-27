@@ -76,7 +76,7 @@ http.createServer(function(req, resp) {
       }
     })
   } else if(fs.existsSync(filepath)) {
-    stream = fs.createReadStream(filepath)
+    stream = filed(filepath)
   } else if(/html/.test(req.headers.accept || '')) {
     logged_pathname = logged_pathname.blue + ' ' + '(generated)'.grey
     stream = response_stream(fake_index(query))
