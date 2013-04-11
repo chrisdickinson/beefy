@@ -4,7 +4,7 @@ a local development server designed to work with browserify.
 
 it:
 
-* can live relaod your browser when your code changes (if you want)
+* can live reload your browser when your code changes (if you want)
 * works with whatever version of browserify; globally installed or 
   locally installed to `node_modules/browserify`.
 * will spit compile errors out into the browser so you don't have that
