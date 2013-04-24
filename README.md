@@ -49,6 +49,15 @@ be scary and bats would fly out of it. but it's there if you need it!
 enable live reloading. this'll start up a sideband server and an `fs` watch on
 the current working directory -- if you save a file, your browser will refresh.
 
+#### `--cwd dir`
+
+serve files as if running from `dir`.
+
+#### `--debug=false`
+
+turn off browserify source map output. by default, beefy automatically inserts
+`-d` into the browserify args -- this turns that behavior off.
+
 ## the fake index
 
 by default, if you get a URL that doesn't exist (with an `Accept` header that has `html` in it someplace), you'll get the "fake index." this page is setup so that
