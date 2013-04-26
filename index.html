@@ -1,0 +1,51 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>@gather</title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <div id="logo"><img src="hexcow.png" width="200px;" /></div>
+  <div id="main" role="main">
+    <header>
+      <img src="logo.png">
+    </header>
+    <div class="whole">
+      <div class="big">
+        <h2 class="intro">High quality, free range JavaScript.</h2>
+        <p>A local development server that aims to make writing modular client-side apps with <a target="_blank" href="https://npmjs.org/">NPM</a> + <a href="http://browserify.org/" target="_blank">browserify</a> fast and fun.</p>
+      </div>
+      <div class="linksContainer">
+        <h4>INSTALL FROM</h5>
+        <h5 class="links">
+          <a target="_blank" href="http://npm.im/beefy">NPMJS.ORG</a>
+          <a target="_blank" href="https://github.com/chrisdickinson/beefy">GITHUB</a>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <article id="how">
+      <h2>How to use Beefy</h2>
+      <p>First, install <a target="_blank" href="http://nodejs.org">node.js</a> (this also installs NPM). Now you can install beefy and browserify:</p>
+      <pre class="highlight"><code>npm install beefy browserify -g</code></pre>
+      <p>The <code>-g</code> means you are installing both modules as global modules, which means you can use them directly from the command line. There is also a way to just bundle beefy along with your node module.</p>
+      <p>Now make a file called <code>foo.js</code> that has some code in it that uses <code>require()</code> statements to load node modules, like this:</p>
+      <pre class="highlight"><code>var url = require('url')
+document.body.innerHTML = JSON.stringify(url.parse(window.location.href))</code></pre>
+      <p>Now start <code>beefy</code>:</p>
+      <pre class="highlight"><code>beefy foo.js</code></pre>
+      <p>This starts the beefy server on the default port of 9966. Open up <a href="http://localhost:9966" target="_blank">localhost:9966</a> to see the code from foo.js running in your browser!</p>
+      <p>Cow photo is from <a href="http://www.flickr.com/photos/bcgovphotos/5589496276/in/photostream/">here</a></p>
+    </article>
+</body>
+</html>
