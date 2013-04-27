@@ -49,6 +49,13 @@ be scary and bats would fly out of it. but it's there if you need it!
 enable live reloading. this'll start up a sideband server and an `fs` watch on
 the current working directory -- if you save a file, your browser will refresh.
 
+if you're not using the generated index file, put the following script tag above
+all of your other JS:
+
+```html
+    <script src="/-/live-reload.js"></script>
+```
+
 #### `--cwd dir`
 
 serve files as if running from `dir`.
