@@ -65,6 +65,10 @@ serve files as if running from `dir`.
 turn off browserify source map output. by default, beefy automatically inserts
 `-d` into the browserify args -- this turns that behavior off.
 
+#### `--open`
+
+automatically discover a port and open it using your default browser.
+
 ## the fake index
 
 by default, if you get a URL that doesn't exist (with an `Accept` header that has `html` in it someplace), you'll get the "fake index." this page is setup so that
