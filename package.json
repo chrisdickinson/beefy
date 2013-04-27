@@ -20,7 +20,9 @@
     "nopt": "~2.1.1",
     "watchr": "~2.4.3",
     "mime": "~1.2.9",
-    "sse-stream": "0.0.2"
+    "sse-stream": "0.0.2",
+    "open": "0.0.3",
+    "portfinder": "~0.2.1"
   },
   "bin": {
     "beefy": "./bin/beefy"
