@@ -69,6 +69,43 @@ turn off browserify source map output. by default, beefy automatically inserts
 
 automatically discover a port and open it using your default browser.
 
+## api
+
+beefy exports one function which returns a http server created from `http.createServer()`
+
+### beefy(cwd, browserify_path, browserify_args, entry_points, live_reload, log)
+
+* `cwd` (string) root folder beefy uses for serving content. this folder is also watched if the `live_reload` parameter is set.
+* `browserify_path` (string) command to execute when browserifying the code. use `'browserify'` for standard behavior.
+* `browserify_args` (array of strings) arguments to the browserify command. use e.g. `[ '-d' ]` for debug mode.
+* `entry_points` (object) dictionary for your entry points and corresponding file to browserify. see example below.
+* `live_reload` (boolean) enable live reload if set
+* `log` (function) logging callback. see signature below.
+
+```js
+var beefy = require('beefy')
+var entry_points = { 'bundle.js': 'path/to/some/js/file.js' }
+var server = beefy('path/to/wwwroot', 'browserify', [ '-d' ], entry_points, true, log)
+server.listen(9966)
+function log(code, time, bytesize, logged_pathname, color) {}
+
+```
+
+the server object is patched with a `reload()` method which allows you to reload clients programmatically:
+
+```js
+var watchr = require('watchr')
+watchr.watch({
+    path: '/some/other/path/not/watched/by/beefy'
+  , listener: function (event, file, stat_now, stat_then) {
+      // do stuff ..
+      server.reload()
+    }
+})
+
+```
+
+
 ## the fake index
 
 by default, if you get a URL that doesn't exist (with an `Accept` header that has `html` in it someplace), you'll get the "fake index." this page is setup so that
