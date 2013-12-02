@@ -80,14 +80,26 @@ beefy exports one function which returns a http server created from `http.create
 * `browserify_args` (array of strings) arguments to the browserify command. use e.g. `[ '-d' ]` for debug mode.
 * `entry_points` (object) dictionary for your entry points and corresponding file to browserify. see example below.
 * `live_reload` (boolean) enable live reload if set
-* `log` (function) logging callback. see signature below.
+* `log` (function) optional logging callback. see signature below.
+* `custom_handler` (function) optional custom request handler. return true in handler to prevent beefy from returning 404, see below.
 
 ```js
 var beefy = require('beefy')
 var entry_points = { 'bundle.js': 'path/to/some/js/file.js' }
-var server = beefy('path/to/wwwroot', 'browserify', [ '-d' ], entry_points, true, log)
+var server = beefy('path/to/wwwroot', 'browserify', [ '-d' ], entry_points, true, log,
+                   custom_handler)
 server.listen(9966)
+
 function log(code, time, bytesize, logged_pathname, color) {}
+
+function custom_handler(req, resp) {
+  if (req.url == '/foo') {
+    // custom handling of '/foo'
+    resp.end('bar\n')
+    return true
+  }
+  // delegate back to beefy
+}
 
 ```
 
