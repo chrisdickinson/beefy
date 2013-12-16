@@ -73,7 +73,7 @@ automatically discover a port and open it using your default browser.
 
 beefy exports one function which returns a http server created from `http.createServer()`
 
-### beefy(cwd, browserify_path, browserify_args, entry_points, live_reload, log)
+### beefy(cwd, browserify_path, browserify_args, entry_points, live_reload, log, custom_handler)
 
 * `cwd` (string) root folder beefy uses for serving content. this folder is also watched if the `live_reload` parameter is set.
 * `browserify_path` (string) command to execute when browserifying the code. use `'browserify'` for standard behavior.
@@ -81,7 +81,7 @@ beefy exports one function which returns a http server created from `http.create
 * `entry_points` (object) dictionary for your entry points and corresponding file to browserify. see example below.
 * `live_reload` (boolean) enable live reload if set
 * `log` (function) optional logging callback. see signature below.
-* `custom_handler` (function) optional custom request handler. return true in handler to prevent beefy from returning 404, see below.
+* `custom_handler` (function) optional custom request handler. return falsy in handler to delegate back to beefy.
 
 ```js
 var beefy = require('beefy')
