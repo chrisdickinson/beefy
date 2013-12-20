@@ -38,11 +38,14 @@ writing `gh-pages`-style sites that already have an index.html, and expect the
 bundle to be pregenerated and available at a certain path.
 
 #### `--browserify command`
+#### `--bundler command`
 
 use `command` instead of `browserify` or `./node_modules/.bin/browserify`.
 
-in theory, you could even get this working with `r.js`, but that would probably
-be scary and bats would fly out of it. but it's there if you need it!
+~~in theory, you could even get this working with `r.js`, but that would probably
+be scary and bats would fly out of it. but it's there if you need it!~~ if you want
+to use `r.js` with beefy, you'll need a config that can write the resulting bundle
+to stdout, and you can run beefy with `beefy :output-url.js --bundler r.js -- -o config.js`.
 
 #### `--live`
 
