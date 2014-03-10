@@ -12,7 +12,7 @@ function locateBundler(cwd, ready) {
 
   do {
     allPaths.push(
-        path.join(cur, 'node_modules', 'bin', 'browserify')
+        path.join(cur, 'node_modules', '.bin', 'browserify')
     )
     last = cur
     cur = path.resolve(cur, '..')
