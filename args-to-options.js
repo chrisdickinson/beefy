@@ -69,7 +69,8 @@ function parse(argv, cwd, ready) {
 
   function buildOutput(err, bundler) {
     var openOptions = {
-        openURL: parsed.url || 'http://127.0.0.1:' + parsed.port
+        openURL: (typeof parsed.url === 'string' && parsed.url) ||
+                 ('http://127.0.0.1:' + parsed.port)
       , openBrowser: !!(parsed.open || parsed.url)
       , showHelp: !!parsed.help
       , port: parsed.port
