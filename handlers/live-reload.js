@@ -1,7 +1,6 @@
 module.exports = handleLiveReload
 
-var ignorepatterns = require('ignorepatterns')
-  , responsify = require('response-stream')
+var responsify = require('response-stream')
   , inject = require('script-injector')
   , through = require('through')
   , watchr = require('watchr')
@@ -105,10 +104,6 @@ function handleLiveReload(opts, io, nextHandler) {
     for(var i = 0, len = queued.length; i < len; ++i) {
       queued[i]()
     }
-  }
-
-  function ignoreFiles(file) {
-    return /[\/\\]\./.test(file) || ignorepatterns.match(path.basename(file))
   }
 
   // ###############################################
