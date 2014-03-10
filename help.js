@@ -1,6 +1,6 @@
 module.exports = help
 
-function help() {
+function help(io) {
 /*
 beefy path/to/entry.js[:as.js] [PORT] -- [arguments to forward to browserify command]
 
@@ -35,9 +35,11 @@ beefy path/to/entry.js[:as.js] [PORT] -- [arguments to forward to browserify com
 
     --open                      Automatically discover an open port, and open the resulting
                                 URL in your default browser.
+
+    --index file                Use a different autogeneration template for index.html.
 */
 
-  var str = help+''
+  var str = help + ''
 
-  process.stdout.write(str.slice(str.indexOf('/*')+3, str.indexOf('*/')))
+  io.error(str.slice(str.indexOf('/*') + 3, str.indexOf('*/')))
 }

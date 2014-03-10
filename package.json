@@ -15,19 +15,24 @@
   "license": "MIT",
   "dependencies": {
     "response-stream": "0.0.0",
-    "colors": "~0.6.0-1",
     "through": "~2.2.0",
-    "nopt": "~2.1.1",
     "mime": "~1.2.9",
-    "sse-stream": "0.0.4",
     "open": "0.0.3",
     "portfinder": "~0.2.1",
     "script-injector": "~0.1.0",
-    "chokidar": "0.8.1",
-    "ignorepatterns": "1.0.1"
+    "pretty-bytes": "~0.1.0",
+    "leftpad": "0.0.0",
+    "xtend": "~2.1.2",
+    "minimist": "0.0.8",
+    "ansicolors": "~0.3.2",
+    "which": "~1.0.5",
+    "watchr": "~2.4.11"
   },
   "bin": {
     "beefy": "./bin/beefy"
   },
-  "preferGlobal": true
+  "preferGlobal": true,
+  "devDependencies": {
+    "tape": "~2.10.2"
+  }
 }

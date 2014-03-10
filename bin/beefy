@@ -1,2 +1,15 @@
 #!/usr/bin/env node
-require('../lib/cli')()
+require('../cli')(
+    process.argv.slice(2)
+  , process.cwd()
+  , process.stdout
+  , process.stderr
+  , onclose
+) 
+
+function onclose(err) {
+  // noop
+  if(err) {
+    process.exit(1)
+  }
+}
