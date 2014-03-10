@@ -38,8 +38,6 @@ function createServer(opts, io, handler) {
   function outer(req, resp) {
     var parsed = url.parse(req.url, true)
 
-    console.log(parsed.pathname)
-
     return inner(this, req, resp, parsed)
   }
 
