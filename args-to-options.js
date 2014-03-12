@@ -87,6 +87,7 @@ function parse(argv, cwd, ready) {
       , entries: entryPoints
       , log: {color: true}
       , cwd: parsed.cwd
+      , realCwd: cwd
     }
 
     handlerOptions.bundler = {
