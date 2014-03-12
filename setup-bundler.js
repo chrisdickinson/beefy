@@ -17,7 +17,7 @@ function setupBundler(cwd, entryPoints, flags, ready) {
       return resolve('browserify', {basedir: process.cwd()}, onlocalbrowserify)
     }
 
-    setupWatchify(localDir, entryPoints, flags, ready)
+    setupWatchify(path.dirname(localDir), entryPoints, flags, ready)
   }
 
   function onlocalbrowserify(err, localDir) {
@@ -25,7 +25,7 @@ function setupBundler(cwd, entryPoints, flags, ready) {
       return findGlobals(onglobals)
     }
 
-    setupBrowserify(localDir, entryPoints, flags, ready)
+    setupBrowserify(path.dirname(localDir), entryPoints, flags, ready)
   }
 
   function onglobals(err, dirs) {
