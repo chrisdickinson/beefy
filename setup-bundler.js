@@ -9,7 +9,7 @@ var findGlobals = require('find-global-packages')
 
 // local watchify, local browserify ->
 // global watchify, global browserify
-function setupBundler(cwd, entryPoints, flags, ready) {
+function setupBundler(cwd, entryPoints, flags, ready, injectFindGlobals) {
   resolve('watchify', {basedir: cwd}, onlocalwatchify)
 
   function onlocalwatchify(err, localDir) {
@@ -22,7 +22,9 @@ function setupBundler(cwd, entryPoints, flags, ready) {
 
   function onlocalbrowserify(err, localDir) {
     if(err || !localDir) {
-      return findGlobals(onglobals)
+      var next = injectFindGlobals || findGlobals
+
+      return next(onglobals)
     }
 
     setupBrowserify(path.dirname(localDir), entryPoints, flags, ready)
