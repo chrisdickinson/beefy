@@ -4,7 +4,7 @@ var minimist = require('minimist')
   , path = require('path')
 
 var normalizeEntryPoints = require('./normalize-entry-points.js')
-  , locateBundler = require('./locate-bundler.js')
+  , setupBundler = require('./setup-bundler.js')
   , extractPort = require('./extract-port.js')
 
 function parse(argv, cwd, ready) {
@@ -27,6 +27,7 @@ function parse(argv, cwd, ready) {
 
   var parsed = minimist(argv.slice(0, idx))
     , bundlerFlags = argv.slice(idx + 1)
+    , legacyBundlerMode = false
     , entryPoints
 
   // open options
@@ -52,9 +53,13 @@ function parse(argv, cwd, ready) {
     entryPoints = normalizeEntryPoints(remain)
     parsed.port = port || 9966
 
-    parsed.bundler ?
-      onbundler(null, parsed.bundler) :
-      locateBundler(cwd, onbundler)
+    if(parsed.bundler) {
+      legacyBundlerMode = true
+
+      return onbundler(null, parsed.bundler)
+    }
+
+    setupBundler(cwd, entryPoints, bundlerFlags, onbundler)
   }
 
   function onbundler(err, bundler) {
@@ -67,7 +72,7 @@ function parse(argv, cwd, ready) {
     return buildOutput()
   }
 
-  function buildOutput(err, bundler) {
+  function buildOutput() {
     var openOptions = {
         openURL: (typeof parsed.url === 'string' && parsed.url) ||
                  ('http://127.0.0.1:' + parsed.port)
@@ -87,6 +92,7 @@ function parse(argv, cwd, ready) {
     handlerOptions.bundler = {
         command: parsed.bundler
       , flags: bundlerFlags
+      , legacy: legacyBundlerMode
     }
 
     ready(null, {

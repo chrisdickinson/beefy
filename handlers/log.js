@@ -50,7 +50,9 @@ function handleLog(opts, io, nextHandler) {
       output = [
           ansicolors[statusDigitToColor[code[0]]](code)
         , pad(time + 'ms', 6, ' ') + ' '
-        , ansicolors.brightBlack(pad(bytesize(size), 9, ' ')) + ' '
+        , ansicolors.brightBlack(
+              pad(bytesize(size).replace(' ', '').toUpperCase(), 9, ' ')
+          ) + ' '
         , parsed.loggedPathname || parsed.pathname
       ].join(' ')
 

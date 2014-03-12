@@ -4,9 +4,10 @@ var xtend = require('xtend')
   , http = require('http')
   , url = require('url')
 
-var defaultIndex = require('./handlers/default-index.js')
+var legacyBundle = require('./handlers/legacy-bundle.js')
+  , defaultIndex = require('./handlers/default-index.js')
   , liveReload = require('./handlers/live-reload.js')
-  , bundle = require('./handlers/bundle-entries.js')
+  , modernBundle = require('./handlers/bundle.js')
   , serveStatic = require('./handlers/static.js')
   , logRequests = require('./handlers/log.js')
 
@@ -22,7 +23,8 @@ function createServer(opts, io, handler) {
   handlers = [
       defaultIndex
     , serveStatic
-    , bundle
+    , legacyBundle
+    , modernBundle
     , logRequests
     , liveReload
   ]

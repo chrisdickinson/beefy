@@ -1,7 +1,6 @@
 module.exports = handleEntryPoints
 
-var spawn = require('child_process').spawn
-  , ansicolors = require('ansicolors')
+var ansicolors = require('ansicolors')
   , Buffer = require('buffer').Buffer
   , through = require('through')
 
@@ -20,6 +19,10 @@ function handleEntryPoints(opts, io, nextHandler) {
 
   bundlerOpts = opts.bundler
 
+  if(bundlerOpts.legacy) {
+    return nextHandler
+  }
+
   if(!opts.entries || !opts.bundler) {
     return nextHandler
   }
@@ -36,17 +39,14 @@ function handleEntryPoints(opts, io, nextHandler) {
       , bundler
       , output
 
-    if(entryPath) {
-      args.unshift(entryPath)
-    }
-
-    args.unshift(bundlerOpts.command)
+    args.unshift(bundlerOpts.command.bundler, entryPath)
     parsed.loggedPathname = ansicolors.magenta(
-        parsed.pathname + ' -> ' + args.map(toLocal).join(' ')
+        parsed.pathname + ' ➞ ' + args.map(toLocal).join(' ')
     )
     args.shift()
+    args.shift()
 
-    bundler = spawn(bundlerOpts.command, args)
+    bundler = bundlerOpts.command(entryPath)
     bundler.stderr.pipe(accumError(resp))
     resp.setHeader('content-type', 'text/javascript')
     bundler.stdout.pipe(resp)

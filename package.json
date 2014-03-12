@@ -26,7 +26,10 @@
     "minimist": "0.0.8",
     "ansicolors": "~0.3.2",
     "which": "~1.0.5",
-    "watchr": "~2.4.11"
+    "watchr": "~2.4.11",
+    "find-global-packages": "0.0.1",
+    "resolve": "^0.6.1",
+    "concat-stream": "^1.4.3"
   },
   "bin": {
     "beefy": "./bin/beefy"
