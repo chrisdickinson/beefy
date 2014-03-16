@@ -36,6 +36,8 @@
   },
   "preferGlobal": true,
   "devDependencies": {
-    "tape": "~2.10.2"
+    "tape": "~2.10.2",
+    "watchify": "^0.6.1",
+    "browserify": "^3.32.1"
   }
 }

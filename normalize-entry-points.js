@@ -52,7 +52,7 @@ function addEntryPoint(output, entryPoint) {
     return
   }
 
-  output[normRepr(entryPoint)] = normPath(entryPoint)
+  output[normPath(normRepr(entryPoint))] = normPath(entryPoint)
 }
 
 function normRepr(repr) {
