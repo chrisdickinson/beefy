@@ -4,6 +4,7 @@ var all = [
     require('./tests/normalize-entry-points.js')
   , require('./tests/bundler-browserify.js')
   , require('./tests/bundler-watchify.js')
+  , require('./tests/args-to-options.js')
   , require('./tests/setup-bundlers.js')
   , require('./tests/extract-port.js')
 ]

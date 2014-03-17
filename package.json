@@ -43,6 +43,7 @@
     "browserify": "^3.32.1",
     "covert": "^0.3.1",
     "touch": "0.0.3",
-    "mock": "^0.1.1"
+    "mock": "^0.1.1",
+    "dotpathlookup": "0.0.1"
   }
 }
