@@ -9,7 +9,7 @@ var setupBrowserify = require('./setup-bundler-browserify.js')
 
 // local watchify, local browserify ->
 // global watchify, global browserify
-function setupBundler(cwd, entryPoints, flags, noWatchify, ready, inject) {
+function setupBundler(cwd, entryPoints, flags, noWatchify, ready) {
   noWatchify ?
     onlocalwatchify() :
     resolve('watchify', {basedir: cwd}, onlocalwatchify)
