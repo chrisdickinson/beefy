@@ -1,10 +1,11 @@
 var tape = require('tape')
 
-var all = [ 
+var all = [
     require('./tests/normalize-entry-points.js')
   , require('./tests/setup-bundler-browserify.js')
   , require('./tests/setup-bundler-watchify.js')
   , require('./tests/setup-bundler.js')
+  , require('./tests/extract-port.js')
 ]
 
 if(module === require.main) {

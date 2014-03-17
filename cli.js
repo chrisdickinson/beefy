@@ -15,6 +15,10 @@ function cli(argv, cwd, stdout, stderr, ready) {
   }
 
   parseArgs(argv, cwd, function(err, options) {
+    if(err) {
+      return ready(err)
+    }
+
     var handlerOpts = options.handler
       , openOpts = options.open
       , server
