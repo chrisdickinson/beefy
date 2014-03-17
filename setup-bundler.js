@@ -4,37 +4,30 @@ var findGlobals = require('find-global-packages')
   , resolve = require('resolve')
   , path = require('path')
 
-var setupBrowserify = require('./setup-bundler-browserify')
-  , setupWatchify = require('./setup-bundler-watchify')
+var setupBrowserify = require('./setup-bundler-browserify.js')
+  , setupWatchify = require('./setup-bundler-watchify.js')
 
 // local watchify, local browserify ->
 // global watchify, global browserify
 function setupBundler(cwd, entryPoints, flags, noWatchify, ready, inject) {
-  inject = inject || {}
-
-  var browserify = inject.setupBrowserify || setupBrowserify
-    , watchify = inject.setupWatchify || setupWatchify
-    , find = inject.findGlobals || findGlobals
-    , res = inject.resolve || resolve
-
   noWatchify ?
     onlocalwatchify() :
-    res('watchify', {basedir: cwd}, onlocalwatchify)
+    resolve('watchify', {basedir: cwd}, onlocalwatchify)
 
   function onlocalwatchify(err, localDir) {
     if(err || !localDir) {
-      return res('browserify', {basedir: cwd}, onlocalbrowserify)
+      return resolve('browserify', {basedir: cwd}, onlocalbrowserify)
     }
 
-    watchify(path.dirname(localDir), entryPoints, flags, ready)
+    setupWatchify(path.dirname(localDir), entryPoints, flags, ready)
   }
 
   function onlocalbrowserify(err, localDir) {
     if(err || !localDir) {
-      return find(onglobals)
+      return findGlobals(onglobals)
     }
 
-    browserify(path.dirname(localDir), entryPoints, flags, ready)
+    setupBrowserify(path.dirname(localDir), entryPoints, flags, ready)
   }
 
   function onglobals(err, dirs) {
@@ -46,11 +39,11 @@ function setupBundler(cwd, entryPoints, flags, noWatchify, ready, inject) {
 
     for(var i = 0, len = dirs.length; i < len; ++i) {
       if(!noWatchify && path.basename(dirs[i]) === 'watchify') {
-        return watchify(dirs[i], entryPoints, flags, ready)
+        return setupWatchify(dirs[i], entryPoints, flags, ready)
       }
 
       if(path.basename(dirs[i]) === 'browserify') {
-        return browserify(dirs[i], entryPoints, flags, ready)
+        return setupBrowserify(dirs[i], entryPoints, flags, ready)
       }
     }
 

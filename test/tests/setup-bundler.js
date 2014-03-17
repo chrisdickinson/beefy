@@ -1,4 +1,5 @@
 var setupBundler = require('../../setup-bundler.js')
+  , mock = require('mock')
 
 module.exports = testResolveOrder
 
@@ -10,12 +11,12 @@ function testResolveOrder(test) {
   var currentGlobals = []
     , resolveable
 
-  var inject = {
-      resolve: fakeResolve
-    , setupWatchify: fakeResult('watchify')
-    , setupBrowserify: fakeResult('browserify')
-    , findGlobals: fakeFindGlobals
-  }
+  var setupBundler = mock('../../setup-bundler.js', {
+      'resolve': fakeResolve
+    , '../../setup-bundler-browserify.js': fakeResult('browserify')
+    , '../../setup-bundler-watchify.js': fakeResult('watchify')
+    , 'find-global-packages': fakeFindGlobals
+  })
 
   test('local watchify resolves first', function(assert) {
     var times = 0
@@ -31,7 +32,7 @@ function testResolveOrder(test) {
       assert.equal(data, 'watchify', 'we should have returned watchify')
       assert.equal(times, 1, 'it should be the only thing we tried')
       assert.end()
-    }, inject)
+    })
   })
 
   test('local browserify resolves second', function(assert) {
@@ -48,7 +49,7 @@ function testResolveOrder(test) {
       assert.equal(data, 'browserify', 'we should have returned browserify')
       assert.equal(times, 2, 'it should be second thing we tried')
       assert.end()
-    }, inject)
+    })
   })
 
   test('global watchify resolves third', function(assert) {
@@ -70,7 +71,7 @@ function testResolveOrder(test) {
       assert.equal(data, 'watchify', 'we should have returned watchify')
       assert.equal(times, 2, 'we should have tried both locally first')
       assert.end()
-    }, inject)
+    })
   })
 
   test('global browserify resolves fourth', function(assert) {
@@ -92,7 +93,7 @@ function testResolveOrder(test) {
       assert.equal(data, 'browserify', 'we should have returned browserify')
       assert.equal(times, 2, 'we should have tried both locally first')
       assert.end()
-    }, inject)
+    })
   })
 
   test('not found resolves to an error (1/2)', function(assert) {
@@ -109,7 +110,7 @@ function testResolveOrder(test) {
     setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.ok(err, 'there should be an error')
       assert.end()
-    }, inject)
+    })
   })
 
   test('not found resolves to an error (2/2)', function(assert) {
@@ -126,7 +127,7 @@ function testResolveOrder(test) {
     setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.ok(err, 'there should be an error')
       assert.end()
-    }, inject)
+    })
   })
 
   function fakeFindGlobals(ready) {
