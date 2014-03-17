@@ -1,17 +1,17 @@
 var normalize = require('../../normalize-entry-points.js')
   , path = require('path')
 
-module.exports = testNormalizeEntryPoints 
+module.exports = testNormalizeEntryPoints
 
 if(module === require.main) {
-  return testNormalizeEntryPoints(require('tape'))
+  require('../index.js')(testNormalizeEntryPoints)
 }
 
 function testNormalizeEntryPoints(test) {
   test('resolves "file:repr"', function(assert) {
     assert.deepEqual(normalize(['file:repr', 'file2:repr2']), {
-        '/repr': path.join(process.cwd(), 'file') 
-      , '/repr2': path.join(process.cwd(), 'file2') 
+        '/repr': path.join(process.cwd(), 'file')
+      , '/repr2': path.join(process.cwd(), 'file2')
     })
 
     assert.end()
@@ -27,15 +27,17 @@ function testNormalizeEntryPoints(test) {
 
   test('resolves "file"', function(assert) {
     assert.deepEqual(normalize(['file']), {
-        '/file': path.join(process.cwd(), 'file') 
+        '/file': path.join(process.cwd(), 'file')
     })
 
     assert.end()
   })
 
   test('file can be relative (./file, .\\file)', function(assert) {
-    assert.deepEqual(normalize(['./file', '../file2', './ex/file3', '../ex/file4']), {
-        '/file': path.join(process.cwd(), 'file') 
+    var args = ['./file', '../file2', './ex/file3', '../ex/file4']
+
+    assert.deepEqual(normalize(args), {
+        '/file': path.join(process.cwd(), 'file')
       , '/file2': path.join(process.cwd(), '..', 'file2')
       , '/ex/file3': path.join(process.cwd(), 'ex', 'file3')
       , '/ex/file4': path.join(process.cwd(), '..', 'ex', 'file4')
@@ -46,8 +48,8 @@ function testNormalizeEntryPoints(test) {
 
   test('file can be implicitly relative (file)', function(assert) {
     assert.deepEqual(normalize(['file', 'file/path']), {
-        '/file': path.join(process.cwd(), 'file') 
-      , '/file/path': path.join(process.cwd(), 'file', 'path') 
+        '/file': path.join(process.cwd(), 'file')
+      , '/file/path': path.join(process.cwd(), 'file', 'path')
     })
 
     assert.end()

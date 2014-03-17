@@ -2,10 +2,10 @@ var setupBrowserify = require('../../setup-bundler-browserify.js')
   , concat = require('concat-stream')
   , path = require('path')
 
-module.exports = testBrowserify 
+module.exports = testBrowserify
 
 if(module === require.main) {
-  return testBrowserify(require('tape'))
+  require('../index.js')(testBrowserify)
 }
 
 function testBrowserify(test) {
@@ -20,7 +20,7 @@ function testBrowserify(test) {
 
     function onready(err, instantBrowserify) {
       assert.ok(!err, 'no error')
-    
+
       var result = instantBrowserify('entry')
 
       assert.ok(result.stdout, 'has stdout')
@@ -40,7 +40,7 @@ function testBrowserify(test) {
 
     function onready(err, instantBrowserify) {
       assert.ok(!err, 'no error')
-    
+
       var result = instantBrowserify('entry')
 
       assert.ok(result.stdout, 'has stdout')
@@ -63,7 +63,7 @@ function testBrowserify(test) {
 
     function onready(err, instantBrowserify) {
       assert.ok(!err, 'no error')
-    
+
       var result = instantBrowserify('entry')
 
       assert.ok(result.stdout, 'has stdout')

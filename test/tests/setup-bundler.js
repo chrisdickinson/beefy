@@ -3,7 +3,7 @@ var setupBundler = require('../../setup-bundler.js')
 module.exports = testResolveOrder
 
 if(module === require.main) {
-  return testResolveOrder(require('tape'))
+  require('../index.js')(testResolveOrder)
 }
 
 function testResolveOrder(test) {
@@ -95,10 +95,27 @@ function testResolveOrder(test) {
     }, inject)
   })
 
-  test('not found resolves to an error', function(assert) {
+  test('not found resolves to an error (1/2)', function(assert) {
     var times = 0
 
-    currentGlobals = null 
+    currentGlobals = null
+
+    resolveable = function(what) {
+      ++times
+
+      return false
+    }
+
+    setupBundler(__dirname, {}, [], function(err, data) {
+      assert.ok(err, 'there should be an error')
+      assert.end()
+    }, inject)
+  })
+
+  test('not found resolves to an error (2/2)', function(assert) {
+    var times = 0
+
+    currentGlobals = []
 
     resolveable = function(what) {
       ++times

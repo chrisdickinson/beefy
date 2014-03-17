@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/chrisdickinson/beefy.git"
   },
+  "scripts": {
+    "test": "node test"
+  },
   "keywords": [
     "simplehttpserver",
     "browserify"
@@ -34,10 +37,11 @@
   "bin": {
     "beefy": "./bin/beefy"
   },
-  "preferGlobal": true,
   "devDependencies": {
     "tape": "~2.10.2",
     "watchify": "^0.6.1",
-    "browserify": "^3.32.1"
+    "browserify": "^3.32.1",
+    "covert": "^0.3.1",
+    "touch": "0.0.3"
   }
 }

@@ -89,7 +89,4 @@ function setupWatchify(dir, entryPoints, flags, ready) {
       }
     }
   }
-
-  function noop() {
-  }
 }

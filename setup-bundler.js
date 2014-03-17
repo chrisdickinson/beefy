@@ -10,6 +10,8 @@ var setupBrowserify = require('./setup-bundler-browserify')
 // local watchify, local browserify ->
 // global watchify, global browserify
 function setupBundler(cwd, entryPoints, flags, ready, inject) {
+  inject = inject || {}
+
   var browserify = inject.setupBrowserify || setupBrowserify
     , watchify = inject.setupWatchify || setupWatchify
     , find = inject.findGlobals || findGlobals

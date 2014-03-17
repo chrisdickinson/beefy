@@ -1,19 +1,23 @@
 var tape = require('tape')
 
-var tests = { 
-    'normalize-entry-points': require('./tests/normalize-entry-points.js')
-  , 'setup-bundler-browserify': require('./tests/setup-bundler-browserify.js')
-  , 'setup-bundler': require('./tests/setup-bundler.js')
-}
+var all = [ 
+    require('./tests/normalize-entry-points.js')
+  , require('./tests/setup-bundler-browserify.js')
+  , require('./tests/setup-bundler-watchify.js')
+  , require('./tests/setup-bundler.js')
+]
 
 if(module === require.main) {
-  return run(tests)
+  run(all)
 }
 
 module.exports = run
 
-function run(tests) {
-  for(var key in tests) {
-    tests[key](tape)
-  }
+function run(suites) {
+  suites = Array.isArray(suites) ? suites : [suites]
+  suites.forEach(function(suite) {
+    suite((suite.stubs || []).reduce(function(lhs, rhs) {
+      return rhs(lhs)
+    }, tape))
+  })
 }
