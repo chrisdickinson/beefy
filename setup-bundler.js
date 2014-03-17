@@ -40,8 +40,6 @@ function setupBundler(cwd, entryPoints, flags, ready, inject) {
       return ready(err)
     }
 
-    // swallow this error.
-    dirs = err ? [] : dirs
     dirs = dirs.sort()
 
     for(var i = 0, len = dirs.length; i < len; ++i) {

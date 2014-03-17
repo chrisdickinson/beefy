@@ -157,7 +157,7 @@ function testWatchify(test) {
 
       // HACK: this is a backdoor way of telling
       // the bundler to stop trying to retry watchify.
-      bundler._abort()
+      setTimeout(bundler._abort, 1000)
 
       var io = bundler(file1)
         , pending = 2
