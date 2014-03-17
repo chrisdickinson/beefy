@@ -139,6 +139,45 @@ function testWatchify(test) {
     })
   })
 
+  test('ensure dne is removed', function(assert) {
+    fs.unlink(dne, function() {
+      assert.end()
+    })
+  })
+
+  test('bad transform does not break everything', function(assert) {
+    var tr = path.join(__dirname, '..', 'fixtures', 'bad-transform.js')
+
+    setupWatchify(watchifyDir, {
+        'file1': file1
+    }, ['-t', tr], onready)
+
+    function onready(err, bundler) {
+      assert.ok(!err, 'there should be no error')
+
+      // HACK: this is a backdoor way of telling
+      // the bundler to stop trying to retry watchify.
+      bundler._abort()
+
+      var io = bundler(file1)
+        , pending = 2
+
+      io.stdout.pipe(concat(function(data) {
+        assert.equal(data + '', '')
+
+        !--pending && assert.end()
+      }))
+
+      io.stderr.pipe(concat(function(data) {
+        assert.ok(
+            /Error: induced/.test(data)
+          , '"Error: induced" should be present in output.'
+        )
+        !--pending && assert.end()
+      }))
+    }
+  })
+
   test('returns results for different entry points', function(assert) {
     assert.end()
   })

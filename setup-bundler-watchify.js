@@ -15,12 +15,21 @@ function setupWatchify(dir, entryPoints, flags, ready) {
       , watchifies = {}
       , lastOut = {}
       , lastErr = {}
+      , aborted
 
     for(var key in entryPoints) {
       watchifies[entryPoints[key]] = buildWatchify(entryPoints[key])
     }
 
     handlePath.bundler = dir
+
+    // NB: this is a backdoor way of preventing retries
+    // in the tests. eventually all bundlers should grow
+    // a `.close()` that allows end users to `.close` a
+    // beefy server.
+    handlePath._abort = function() {
+      aborted = true
+    }
 
     return ready(null, handlePath)
 
@@ -60,7 +69,10 @@ function setupWatchify(dir, entryPoints, flags, ready) {
 
       function onerror(err) {
         watcher.removeListener('update', onupdate)
-        setTimeout(buildWatchify, minimist(flags).delay || 600, entry)
+
+        if(!aborted) {
+          setTimeout(buildWatchify, minimist(flags).delay || 600, entry)
+        }
       }
 
       function onupdate() {
