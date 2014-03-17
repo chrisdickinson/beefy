@@ -41,6 +41,10 @@ function parse(argv, cwd, ready) {
   parsed.live = parsed.l || parsed.live
   parsed.debug = parsed.d || parsed.debug
   parsed.bundler = parsed.browserify || parsed.bundler
+  parsed.noWatchify = parsed.nw ||
+    parsed.nowatchify ||
+    parsed['no-watchify'] ||
+    parsed.noWatchify
   parsed.index = parsed.i || parsed.index
 
   if(parsed.debug === undefined || parsed.debug || !parsed.bundler) {
@@ -59,7 +63,13 @@ function parse(argv, cwd, ready) {
       return onbundler(null, parsed.bundler)
     }
 
-    setupBundler(cwd, entryPoints, bundlerFlags, onbundler)
+    setupBundler(
+        cwd
+      , entryPoints
+      , bundlerFlags
+      , parsed.noWatchify
+      , onbundler
+    )
   }
 
   function onbundler(err, bundler) {

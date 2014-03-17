@@ -9,7 +9,7 @@ var setupBrowserify = require('./setup-bundler-browserify')
 
 // local watchify, local browserify ->
 // global watchify, global browserify
-function setupBundler(cwd, entryPoints, flags, ready, inject) {
+function setupBundler(cwd, entryPoints, flags, noWatchify, ready, inject) {
   inject = inject || {}
 
   var browserify = inject.setupBrowserify || setupBrowserify
@@ -17,7 +17,9 @@ function setupBundler(cwd, entryPoints, flags, ready, inject) {
     , find = inject.findGlobals || findGlobals
     , res = inject.resolve || resolve
 
-  res('watchify', {basedir: cwd}, onlocalwatchify)
+  noWatchify ?
+    onlocalwatchify() :
+    res('watchify', {basedir: cwd}, onlocalwatchify)
 
   function onlocalwatchify(err, localDir) {
     if(err || !localDir) {
@@ -43,7 +45,7 @@ function setupBundler(cwd, entryPoints, flags, ready, inject) {
     dirs = dirs.sort()
 
     for(var i = 0, len = dirs.length; i < len; ++i) {
-      if(path.basename(dirs[i]) === 'watchify') {
+      if(!noWatchify && path.basename(dirs[i]) === 'watchify') {
         return watchify(dirs[i], entryPoints, flags, ready)
       }
 

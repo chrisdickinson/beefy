@@ -7,7 +7,7 @@ if(module === require.main) {
 }
 
 function testResolveOrder(test) {
-  var currentGlobals = ''
+  var currentGlobals = []
     , resolveable
 
   var inject = {
@@ -26,7 +26,7 @@ function testResolveOrder(test) {
       return what === 'watchify'
     }
 
-    setupBundler(__dirname, {}, [], function(err, data) {
+    setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.equal(err, null, 'there should be no error')
       assert.equal(data, 'watchify', 'we should have returned watchify')
       assert.equal(times, 1, 'it should be the only thing we tried')
@@ -43,7 +43,7 @@ function testResolveOrder(test) {
       return what === 'browserify'
     }
 
-    setupBundler(__dirname, {}, [], function(err, data) {
+    setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.equal(err, null, 'there should be no error')
       assert.equal(data, 'browserify', 'we should have returned browserify')
       assert.equal(times, 2, 'it should be second thing we tried')
@@ -65,7 +65,7 @@ function testResolveOrder(test) {
       return false
     }
 
-    setupBundler(__dirname, {}, [], function(err, data) {
+    setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.equal(err, null, 'there should be no error')
       assert.equal(data, 'watchify', 'we should have returned watchify')
       assert.equal(times, 2, 'we should have tried both locally first')
@@ -87,7 +87,7 @@ function testResolveOrder(test) {
       return false
     }
 
-    setupBundler(__dirname, {}, [], function(err, data) {
+    setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.equal(err, null, 'there should be no error')
       assert.equal(data, 'browserify', 'we should have returned browserify')
       assert.equal(times, 2, 'we should have tried both locally first')
@@ -106,7 +106,7 @@ function testResolveOrder(test) {
       return false
     }
 
-    setupBundler(__dirname, {}, [], function(err, data) {
+    setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.ok(err, 'there should be an error')
       assert.end()
     }, inject)
@@ -123,7 +123,7 @@ function testResolveOrder(test) {
       return false
     }
 
-    setupBundler(__dirname, {}, [], function(err, data) {
+    setupBundler(__dirname, {}, [], false, function(err, data) {
       assert.ok(err, 'there should be an error')
       assert.end()
     }, inject)
