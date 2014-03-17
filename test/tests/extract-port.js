@@ -1,8 +1,8 @@
-var extract = require('../../extract-port.js')
+var extract = require('../../lib/extract-port.js')
   , path = require('path')
   , mock = require('mock')
 
-extract = mock('../../extract-port.js', {
+extract = mock('../../lib/extract-port.js', {
     portfinder: mockPortfinder()
 })
 

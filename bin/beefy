@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('../cli')(
+require('../lib/cli.js')(
     process.argv.slice(2)
   , process.cwd()
   , process.stdout

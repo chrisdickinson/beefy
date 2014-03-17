@@ -1,4 +1,4 @@
-var normalize = require('../../normalize-entry-points.js')
+var normalize = require('../../lib/normalize-entry-points.js')
   , path = require('path')
 
 module.exports = testNormalizeEntryPoints

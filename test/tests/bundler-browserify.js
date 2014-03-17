@@ -1,4 +1,4 @@
-var setupBrowserify = require('../../setup-bundler-browserify.js')
+var setupBrowserify = require('../../lib/bundlers/browserify.js')
   , concat = require('concat-stream')
   , path = require('path')
 

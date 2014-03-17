@@ -1,4 +1,4 @@
-var setupBundler = require('../../setup-bundler.js')
+var setupBundler = require('../../lib/setup-bundlers.js')
   , mock = require('mock')
 
 module.exports = testResolveOrder
@@ -11,10 +11,10 @@ function testResolveOrder(test) {
   var currentGlobals = []
     , resolveable
 
-  var setupBundler = mock('../../setup-bundler.js', {
+  var setupBundler = mock('../../lib/setup-bundlers.js', {
       'resolve': fakeResolve
-    , '../../setup-bundler-browserify.js': fakeResult('browserify')
-    , '../../setup-bundler-watchify.js': fakeResult('watchify')
+    , '../../lib/bundlers/browserify.js': fakeResult('browserify')
+    , '../../lib/bundlers/watchify.js': fakeResult('watchify')
     , 'find-global-packages': fakeFindGlobals
   })
 

@@ -1,4 +1,4 @@
-var setupWatchify = require('../../setup-bundler-watchify.js')
+var setupWatchify = require('../../lib/bundlers/watchify.js')
   , concat = require('concat-stream')
   , touch = require('touch')
   , path = require('path')
