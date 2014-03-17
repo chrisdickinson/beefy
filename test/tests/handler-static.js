@@ -13,11 +13,11 @@ if(module === require.main) {
 function testStaticHandler(test) {
   var staticDir = path.join(__dirname, '..', 'fixtures', 'static')
 
-  test('has extname, no added paths', function(assert) {
+  test('test default extensions', function(assert) {
     var parameterized = [
         ['has-index/index.html', 'has-index/index.html', 200, 'plain', 'html']
-      , ['has-extname.html', 'has-extname.html', 200, 'html', 'html']
       , ['has-extname', 'has-extname/index.html', 200, 'html', 'html']
+      , ['has-extname.html', 'has-extname.html', 200, 'html', 'html']
       , ['has-index', 'has-index/index.html', 200, 'html', 'html']
       , ['plain-file', 'plain-file.html', 200, 'html', 'html']
       , ['has-index', 'not found', 404, 'plain', 'plain']

@@ -2,6 +2,7 @@ var tape = require('tape')
 
 var all = [
     require('./tests/normalize-entry-points.js')
+  , require('./tests/handler-default-index.js')
   , require('./tests/bundler-browserify.js')
   , require('./tests/bundler-watchify.js')
   , require('./tests/args-to-options.js')
