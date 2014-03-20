@@ -10,6 +10,7 @@ var all = [
   , require('./tests/handler-static.js')
   , require('./tests/setup-bundlers.js')
   , require('./tests/extract-port.js')
+  , require('./tests/handler-log.js')
 ]
 
 if(module === require.main) {
