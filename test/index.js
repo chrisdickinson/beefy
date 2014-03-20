@@ -11,6 +11,8 @@ var all = [
   , require('./tests/setup-bundlers.js')
   , require('./tests/extract-port.js')
   , require('./tests/handler-log.js')
+  , require('./tests/help.js')
+  , require('./tests/cli.js')
 ]
 
 if(module === require.main) {

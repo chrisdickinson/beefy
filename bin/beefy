@@ -4,10 +4,10 @@ require('../lib/cli.js')(
   , process.cwd()
   , process.stdout
   , process.stderr
-  , onclose
+  , onready
 ) 
 
-function onclose(err) {
+function onready(err) {
   // noop
   if(err) {
     process.exit(1)

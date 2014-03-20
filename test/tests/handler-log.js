@@ -42,15 +42,18 @@ function testLogHandler(test) {
       , server
       , resp
 
-    server = cli([12345].concat(args), __dirname, stdout, stderr, onclose)
+    server = cli([12345].concat(args), __dirname, stdout, stderr, onserver)
     opts.host = 'localhost'
     opts.port = '12345'
 
-    server.once('listening', function() {
+    function onserver(err, svr) {
       http.get(opts, onres)
         .on('error', ready)
         .end()
-    })
+
+      server = svr
+      server.once('close', onclose)
+    }
 
     function onres(res) {
       resp = res
