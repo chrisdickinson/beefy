@@ -13,6 +13,7 @@ var all = [
   , require('./tests/extract-port.js')
   , require('./tests/handler-log.js')
   , require('./tests/help.js')
+  , require('./tests/lint.js')
   , require('./tests/cli.js')
 ]
 

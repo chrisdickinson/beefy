@@ -25,6 +25,7 @@ function testLogHandler(test) {
 
   test('test no color', function(assert) {
     var file = '/' + path.basename(__filename)
+
     run({path: file}, ['--no-color'], function(err, stdio) {
       var line = stdio.stdout.accum.join('').split('\n')[1]
 

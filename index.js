@@ -1,1 +1,1 @@
-module.exports = require('./lib/server')
+module.exports = require('./lib/create-handler.js')
