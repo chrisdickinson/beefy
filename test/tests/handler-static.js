@@ -3,6 +3,7 @@ var createStatic = require('../../lib/handlers/static.js')
   , http = require('http')
   , path = require('path')
   , url = require('url')
+  , os = require('os')
 
 module.exports = testStaticHandler
 
@@ -53,7 +54,7 @@ function testStaticHandler(test) {
         assert.equal(resp.statusCode, tuple[2])
         assert.equal(resp.headers['content-type'], 'text/' + tuple[4])
         resp.pipe(concat(function(data) {
-          assert.equal((data + '').split('\n')[0], tuple[1])
+          assert.equal((data + '').split(os.EOL)[0], tuple[1])
           server.close(function() {
             !--pending && assert.end()
           })
