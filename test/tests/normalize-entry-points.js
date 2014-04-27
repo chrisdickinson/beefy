@@ -57,7 +57,7 @@ function testNormalizeEntryPoints(test) {
 
   test('file can be unix absolute (/file)', function(assert) {
     assert.deepEqual(normalize(['/file']), {
-        '/file': '/file'
+        '/file': path.resolve('/file')
     })
     assert.end()
   })
