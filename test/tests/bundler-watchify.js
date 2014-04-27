@@ -6,7 +6,7 @@ var setupWatchify = require('../../lib/bundlers/watchify.js')
 
 module.exports = testWatchify
 module.exports.stubs = [
-    require('../stub-fs-watch')
+    require('../stub-fs-watch.js')
 ]
 
 if(module === require.main) {
@@ -157,7 +157,7 @@ function testWatchify(test) {
 
       // HACK: this is a backdoor way of telling
       // the bundler to stop trying to retry watchify.
-      setTimeout(bundler._abort, 1000)
+      setTimeout(bundler._abort, 100)
 
       var io = bundler(file1)
         , pending = 2
@@ -176,10 +176,6 @@ function testWatchify(test) {
         !--pending && assert.end()
       }))
     }
-  })
-
-  test('returns results for different entry points', function(assert) {
-    assert.end()
   })
 
   function expectModule(assert, bundled, value) {
