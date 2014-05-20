@@ -8,7 +8,8 @@
     "url": "git://github.com/chrisdickinson/beefy.git"
   },
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "test-cov": "istanbul cover test/index.js"
   },
   "keywords": [
     "simplehttpserver",
@@ -45,6 +46,7 @@
     "touch": "0.0.3",
     "mock": "^0.1.1",
     "dotpathlookup": "0.0.1",
-    "jsl": "^0.1.3"
+    "jsl": "^0.1.3",
+    "istanbul": "^0.2.8"
   }
 }

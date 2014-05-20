@@ -26,6 +26,7 @@ function beefy(dir, entries, innerHandler, bundlerFlags, quiet, ready) {
   }
 
   ready = arguments[idx] || Function()
+  ready = ready === innerHandler ? Function() : ready
 
   if(opts.bundler) {
     serverHandler = createHandler(opts, io, innerHandler)
