@@ -1,0 +1,7 @@
+{
+    "asi": true,
+    "boss": true,
+    "expr": true,
+    "laxbreak": true,
+    "laxcomma": true
+}

@@ -29,5 +29,11 @@
   "bin": {
     "beefy": "./bin/beefy"
   },
-  "preferGlobal": true
+  "preferGlobal": true,
+  "devDependencies": {
+    "jshint": "^2.5.1"
+  },
+  "scripts": {
+    "jshint": "jshint ."
+  }
 }
