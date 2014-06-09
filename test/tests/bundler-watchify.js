@@ -145,39 +145,6 @@ function testWatchify(test) {
     })
   })
 
-  test('bad transform does not break everything', function(assert) {
-    var tr = path.join(__dirname, '..', 'fixtures', 'bad-transform.js')
-
-    setupWatchify(watchifyDir, {
-        'file1': file1
-    }, ['-t', tr], onready)
-
-    function onready(err, bundler) {
-      assert.ok(!err, 'there should be no error')
-
-      // HACK: this is a backdoor way of telling
-      // the bundler to stop trying to retry watchify.
-      setTimeout(bundler._abort, 100)
-
-      var io = bundler(file1)
-        , pending = 2
-
-      io.stdout.pipe(concat(function(data) {
-        assert.equal(data + '', '')
-
-        !--pending && assert.end()
-      }))
-
-      io.stderr.pipe(concat(function(data) {
-        assert.ok(
-            /Error: induced/.test(data)
-          , '"Error: induced" should be present in output.'
-        )
-        !--pending && assert.end()
-      }))
-    }
-  })
-
   function expectModule(assert, bundled, value) {
     try {
       Function(bundled)()
