@@ -83,7 +83,10 @@ function beefy(opts, ready) {
     function toObject(obj, entry) {
       entry = path.resolve(opts.cwd, entry)
 
-      obj[entry.replace(opts.cwd, '/').replace('\\', '/').replace(/\/+/g, '/')] = entry
+      obj[entry
+        .replace(opts.cwd, '/')
+        .replace('\\', '/')
+        .replace(/\/+/g, '/')] = entry
 
       return obj
     }
