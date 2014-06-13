@@ -8,7 +8,8 @@ var beefy = require('../../index.js')
 
 module.exports = testIntegration
 module.exports.stubs = [
-    require('../http-server.js')
+    require('../stub-fs-watch.js')
+  , require('../http-server.js')
 ]
 
 if(module === require.main) {
@@ -22,7 +23,7 @@ function testIntegration(test) {
     var cwd = path.join(BASE_DIR, 'no-ext-as-file')
 
     server.on('request', beefy({
-        log: false
+        quiet: true
       , cwd: cwd
     }))
 
@@ -54,7 +55,7 @@ function testIntegration(test) {
     var cwd = path.join(BASE_DIR, 'no-ext-as-file')
 
     server.on('request', beefy({
-        log: false
+        quiet: true
       , cwd: cwd
     }))
 
@@ -86,7 +87,7 @@ function testIntegration(test) {
     var cwd = path.join(BASE_DIR, 'no-ext-as-dir')
 
     server.on('request', beefy({
-        log: false
+        quiet: true
       , cwd: cwd
     }))
 
@@ -118,7 +119,7 @@ function testIntegration(test) {
     var cwd = path.join(BASE_DIR, 'no-ext-as-dir')
 
     server.on('request', beefy({
-        log: false
+        quiet: true
       , cwd: cwd
     }))
 
@@ -165,7 +166,7 @@ function testIntegration(test) {
     }
 
     server.on('request', beefy({
-        log: false
+        quiet: true
       , cwd: cwd
       , entries: entries
       , bundler: bundler
@@ -228,7 +229,7 @@ function testIntegration(test) {
     }
 
     server.on('request', beefy({
-        log: false
+        quiet: true
       , cwd: cwd
       , entries: entries
       , bundler: bundler
@@ -279,9 +280,5 @@ function testIntegration(test) {
 
       return {stdout: stdout, stderr: stderr}
     }
-  })
-
-  test('broken HTML does not kill the process', function(assert, server) {
-    assert.end()
   })
 }

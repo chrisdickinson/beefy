@@ -7,7 +7,7 @@ var resolve = require('resolve')
 
 function suite(baseTest) {
   var modulePath = resolve.sync('chokidar', {
-      basedir: path.dirname(require.resolve('watchify'))
+      basedir: path.dirname(resolve.sync('watchify'))
   })
 
   var chokidar = require(modulePath)
@@ -35,16 +35,21 @@ function suite(baseTest) {
 
     tape('integration / teardown stub fs.watch', function(assert) {
       fs.watch = oldWatch
+      chokidar.watch = oldChokidar
 
-      while(watchers.length) {
-        try {
-          watchers.shift().close()
-        } catch(err) {
-          // noop.
+      // TODO(chrisdickinson): remove this setTimeout
+      // once https://github.com/paulmillr/chokidar/pull/130/files is merged.
+      setTimeout(function() {
+        while(watchers.length) {
+          try {
+            watchers.shift().close()
+          } catch(err) {
+            // noop.
+          }
         }
-      }
 
-      assert.end()
+        assert.end()
+      }, 100)
     })
 
     return result

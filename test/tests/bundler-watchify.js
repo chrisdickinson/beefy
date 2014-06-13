@@ -40,6 +40,7 @@ function testWatchify(test) {
       touch(file1, function() {
         bundler(file1).stdout.pipe(concat(function(data) {
           expectModule(assert, data, 'YES THIS IS DOG')
+          bundler.close()
           assert.end()
         }))
       })
@@ -55,7 +56,7 @@ function testWatchify(test) {
       assert.ok(!err, 'there should be no error')
 
       touch(bad, function() {
-        iter(iter.bind(null, assert.end))
+        iter(iter.bind(null, end))
 
         function iter(next) {
           var io = bundler(bad)
@@ -74,6 +75,11 @@ function testWatchify(test) {
             !--pending && next()
           }))
         }
+
+        function end() {
+          bundler.close()
+          assert.end()
+        }
       })
     }
   })
@@ -87,7 +93,7 @@ function testWatchify(test) {
       assert.ok(!err, 'there should be no error')
 
       touch(bad, function() {
-        iter(iter.bind(null, assert.end))
+        iter(iter.bind(null, end))
 
         function iter(next) {
           var io = bundler(file1)
@@ -102,6 +108,11 @@ function testWatchify(test) {
             assert.equal(data + '', '')
             !--pending && next()
           }))
+        }
+
+        function end() {
+          bundler.close()
+          assert.end()
         }
       })
     }

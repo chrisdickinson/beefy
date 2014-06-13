@@ -3,75 +3,89 @@ var setupWatchify = require('./lib/bundlers/watchify.js')
   , makeIO = require('./lib/make-io.js')
   , path = require('path')
 
+var parseArgs = require('./lib/args-to-options.js')
+
 module.exports = beefy
 
-function beefy(dir, entries, innerHandler, bundlerFlags, quiet, ready) {
-  var io = makeIO(process)
-    , serverHandler
-    , opts
-    , idx
+function beefy(opts, ready) {
+  var io = makeIO(process, process.stdout, process.stderr)
 
-  opts = typeof arguments[0] === 'object' ? dir : {
-        log: !quiet
-      , entries: entries
-      , bundler: null
-      , cwd: dir
+  opts =
+    typeof opts === 'string' ? {entries: [opts]} :
+    Array.isArray(opts) ? {entries: opts} :
+    opts
+
+  opts.cwd = opts.cwd || path.dirname(module.parent)
+  opts.entries = opts.entries || []
+  opts.bundlerFlags = opts.bundlerFlags || []
+  opts.bundler = opts.bundler || null
+  opts.quiet = opts.quiet === undefined ? true : opts.quiet
+  opts.live = !!opts.live
+
+  var args = ['node', 'beefy', '9999']
+    , innerHandler
+
+  if(opts.cwd) {
+    args.push('--cwd', opts.cwd)
   }
 
-  opts.entries = fixupEntries(opts.entries)
-  idx = arguments.length - 1
-
-  while(typeof arguments[idx] !== 'function' && idx !== -1) {
-    --idx
+  if(opts.live) {
+    args.push('--live')
   }
 
-  ready = arguments[idx] || Function()
-  ready = ready === innerHandler ? Function() : ready
-
-  if(opts.bundler) {
-    serverHandler = createHandler(opts, io, innerHandler)
-    ready(null, serverHandler)
-
-    return beefyHandler
+  if(typeof opts.bundler === 'string') {
+    args.push('--bundler', opts.bundler)
   }
 
-  setupWatchify(
-      path.dirname(require.resolve('watchify'))
-    , opts.entries
-    , bundlerFlags || (opts.bundler && opts.bundler.flags) || []
-    , onready
-  )
+  if(opts.index) {
+    args.push('--index', opts.index)
+  }
 
-  return beefyHandler
+  args.push('--')
+  args = args.concat(opts.bundlerFlags)
 
-  function beefyHandler(req, resp) {
-    if(!serverHandler) {
-      return setTimeout(beefyHandler, 0, req, resp)
+  parseArgs(args, opts.cwd, function(err, genOpts) {
+    if(err) {
+      if(ready) {
+        return ready(err)
+      }
+
+      throw err
     }
 
-    serverHandler(req, resp)
+    switch(opts.bundler && typeof opts.bundler) {
+      case 'function':
+        genOpts.handler.bundler.command = opts.bundler
+        break
+      case 'object':
+        genOpts.handler.bundler = opts.bundler
+        break
+    }
+
+    genOpts.handler.entries = fixupEntries(opts.entries)
+    genOpts.handler.log = opts.quiet ? false : genOpts.handler.log
+    innerHandler = createHandler(genOpts.handler, io)
+  })
+
+  return handler
+
+  function handler(req, resp) {
+    if(!innerHandler) {
+      return setTimeout(handler, 0, req, resp)
+    }
+
+    innerHandler(req, resp)
   }
 
   function fixupEntries(entries) {
     return Array.isArray(entries) ? entries.reduce(toObject, {}) : entries
 
     function toObject(obj, entry) {
-      entry = path.resolve(dir, entry)
+      entry = path.resolve(opts.cwd, entry)
 
       obj[entry.replace(opts.cwd, '/').replace('\\', '/')] = entry
 
       return obj
     }
-  }
-
-  function onready(err, handler) {
-    if(err) {
-      return ready(err)
-    }
-
-    opts.bundler = {command: handler, flags: bundlerFlags || []}
-
-    serverHandler = createHandler(opts, io, innerHandler)
-    ready(null, serverHandler)
   }
 }
