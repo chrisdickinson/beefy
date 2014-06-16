@@ -65,8 +65,8 @@ to stdout, and you can run beefy with `beefy :output-url.js --bundler r.js -- -o
 Enable live reloading. this'll start up a sideband server and an `fs` watch on
 the current working directory -- if you save a file, your browser will refresh.
 
-if you're not using the generated index file, put the following script tag above
-all of your other JS:
+if you're not using the generated index file, beefy has your back -- it'll still
+automatically inject the appropriate script tag.
 
 ```html
     <script src="/-/live-reload.js"></script>
