@@ -21,8 +21,9 @@ function beefy(opts, ready) {
   opts.bundler = opts.bundler || null
   opts.quiet = opts.quiet === undefined ? true : opts.quiet
   opts.live = !!opts.live
+  opts.watchify = opts.watchify === undefined ? true : opts.watchify
 
-  var args = ['node', 'beefy', '9999']
+  var args = ['9999']
     , innerHandler
 
   if(opts.cwd) {
@@ -39,6 +40,10 @@ function beefy(opts, ready) {
 
   if(opts.index) {
     args.push('--index', opts.index)
+  }
+
+  if('watchify' in opts && !opts.watchify) {
+    args.push('--no-watchify')
   }
 
   args.push('--')
