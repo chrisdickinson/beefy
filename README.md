@@ -155,6 +155,8 @@ as an array or string, entries will be mapped like so: `index.js` will
 map `/index.js` to `<cwd>/index.js`.
 * `unhandled`: Function accepting req and resp. Called for 404s. If not
 given, a default 404 handler will be used.
+* `watchify`: defaults to true -- when true, beefy will prefer using watchify
+to browserify. If false, beefy will prefer browserify.
 
 Beefy may accept, as a shorthand, `beefy("file.js")` or `beefy(["file.js"])`.
 
