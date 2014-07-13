@@ -1,5 +1,4 @@
-var setupWatchify = require('./lib/bundlers/watchify.js')
-  , createHandler = require('./lib/create-handler.js')
+var createHandler = require('./lib/create-handler.js')
   , makeIO = require('./lib/make-io.js')
   , path = require('path')
 

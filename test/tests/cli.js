@@ -1,9 +1,7 @@
 var parseArgs = require('../../lib/args-to-options.js')
   , cli = require('../../lib/cli.js')
   , through = require('through')
-  , path = require('path')
   , mock = require('mock')
-  , http = require('http')
 
 var currentParseArgs = parseArgs
 

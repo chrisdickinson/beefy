@@ -2,7 +2,6 @@ var createBundler = require('../../lib/handlers/bundle.js')
   , concat = require('concat-stream')
   , through = require('through')
   , http = require('http')
-  , path = require('path')
   , url = require('url')
 
 module.exports = testBundleHandler

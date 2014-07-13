@@ -1,5 +1,4 @@
 var extract = require('../../lib/extract-port.js')
-  , path = require('path')
   , mock = require('mock')
 
 extract = mock('../../lib/extract-port.js', {

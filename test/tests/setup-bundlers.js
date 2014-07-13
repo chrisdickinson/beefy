@@ -1,5 +1,4 @@
-var setupBundler = require('../../lib/setup-bundlers.js')
-  , mock = require('mock')
+var mock = require('mock')
 
 module.exports = testResolveOrder
 

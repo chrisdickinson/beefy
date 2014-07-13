@@ -1,8 +1,5 @@
-var createHandler = require('../../lib/create-handler.js')
-  , lookup = require('dotpathlookup')
-  , through = require('through')
+var through = require('through')
   , http = require('http')
-  , path = require('path')
   , mock = require('mock')
 
 module.exports = testCreateHandler

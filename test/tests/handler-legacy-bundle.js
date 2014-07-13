@@ -1,10 +1,4 @@
-var createBundler = require('../../lib/handlers/legacy-bundle.js')
-  , concat = require('concat-stream')
-  , through = require('through')
-  , http = require('http')
-  , path = require('path')
-  , mock = require('mock')
-  , url = require('url')
+var mock = require('mock')
 
 module.exports = testLegacyBundleHandler
 

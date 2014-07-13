@@ -1,7 +1,6 @@
 var beefy = require('../../index.js')
   , concat = require('concat-stream')
   , through = require('through')
-  , mock = require('mock')
   , http = require('http')
   , path = require('path')
   , fs = require('fs')
