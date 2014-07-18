@@ -86,6 +86,8 @@ function testArgsToOptions(test) {
       , [['--', '-d'], 'handler.bundler.flags.0', '-d']
       , [['--debug'], 'handler.bundler.flags.0', '-d']
       , [[], 'handler.bundler.flags.0', '-d']
+      , [['--debug=false'], 'handler.bundler.flags.0', undefined]
+      , [['--debug', 'false'], 'handler.bundler.flags.0', undefined]
     ]
 
     var pending = args_to_result.length
