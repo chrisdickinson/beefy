@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "ansicolors": "~0.3.2",
-    "chokidar": "^0.8.2",
+    "chokidar": "^0.8.4",
     "concat-stream": "^1.4.3",
     "find-global-packages": "0.0.1",
     "ignorepatterns": "^1.0.1",
