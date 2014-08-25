@@ -91,6 +91,10 @@ Provide your own default index! This works great for single page apps,
 as every URL on your site will be redirected to the same HTML file. Every
 instance of `{{entry}}` will be replaced with the entry point of your app.
 
+#### `--cache`
+
+Beefy will cache the bundle. This is useful for running in "production", when you don't expect the bundle to change between requests.
+
 ## api
 
 ```javascript
