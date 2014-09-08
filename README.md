@@ -140,7 +140,7 @@ attributes:
 
 * `cwd`: String. The base directory that beefy is serving. Defaults to the
 directory of the module that **first** required beefy.
-* `quiet`: Boolean. Whether or not to output request information to the console. Defaults to false.
+* `quiet`: Boolean. Whether or not to output request information to the console. Defaults to true.
 * `live`: Boolean. Whether to enable live reloading. Defaults to false.
 * `bundler`: null, String, or Function. If a string is given, beefy will
 attempt to run that string as a child process whenever the path is given.
