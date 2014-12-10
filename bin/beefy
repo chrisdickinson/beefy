@@ -10,6 +10,6 @@ require('../lib/cli.js')(
 function onready(err) {
   // noop
   if(err) {
-    process.exit(1)
+    throw err
   }
 }
