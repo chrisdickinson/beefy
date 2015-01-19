@@ -22,6 +22,7 @@ function beefy(opts, ready) {
   opts.quiet = opts.quiet === undefined ? true : opts.quiet
   opts.live = !!opts.live
   opts.watchify = opts.watchify === undefined ? true : opts.watchify
+  opts.watchdir = opts.watchdir || opts.cwd
 
   var args = ['9999']
     , innerHandler
@@ -44,6 +45,10 @@ function beefy(opts, ready) {
 
   if('watchify' in opts && !opts.watchify) {
     args.push('--no-watchify')
+  }
+
+  if(opts.watchdir) {
+    args.push('--watchdir', opts.watchdir)
   }
 
   args.push('--')
