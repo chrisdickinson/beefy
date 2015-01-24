@@ -119,7 +119,7 @@ http.createServer(beefy({
   , quiet: false
   , bundlerFlags: ['-t', 'brfs']
   , unhandled: on404
-)).listen(8124)
+})).listen(8124)
 
 function on404(req, resp) {
   resp.writeHead(404, {})
