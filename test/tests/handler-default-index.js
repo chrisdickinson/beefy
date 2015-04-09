@@ -193,11 +193,11 @@ function testDefaultIndexHandler(test) {
       handler(server, req, resp, url.parse(req.url, true))
     })
 
-    server.listen(123456, onlistening)
+    server.listen(12456, onlistening)
 
     function onlistening() {
       var opts = url.parse(
-          'http://127.0.0.1:123456/'
+          'http://127.0.0.1:12456/'
       )
 
       opts.headers = headers

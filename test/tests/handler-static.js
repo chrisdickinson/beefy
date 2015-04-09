@@ -36,11 +36,11 @@ function testStaticHandler(test) {
         handleStatic(server, req, resp, url.parse(req.url, true))
       })
 
-      server.listen(123456 + idx, onlistening)
+      server.listen(12456 + idx, onlistening)
 
       function onlistening() {
         var opts = url.parse(
-            'http://127.0.0.1:' + (123456 + idx) + '/' + tuple[0]
+            'http://127.0.0.1:' + (12456 + idx) + '/' + tuple[0]
         )
 
         opts.headers = {

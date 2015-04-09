@@ -71,10 +71,10 @@ function testBundleHandler(test) {
       handleBundle(server, req, resp, url.parse(req.url, true))
     })
 
-    server.listen(123456, onlistening)
+    server.listen(12456, onlistening)
 
     function onlistening() {
-      http.get('http://127.0.0.1:123456/a.js', onresponse)
+      http.get('http://127.0.0.1:12456/a.js', onresponse)
     }
 
     function onresponse(resp) {
@@ -131,10 +131,10 @@ function testBundleHandler(test) {
       handleBundle(server, req, resp, url.parse(req.url, true))
     })
 
-    server.listen(123456, onlistening)
+    server.listen(12456, onlistening)
 
     function onlistening() {
-      http.get('http://127.0.0.1:123456/a.js', onresponse)
+      http.get('http://127.0.0.1:12456/a.js', onresponse)
     }
 
     function onresponse(resp) {
