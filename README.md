@@ -91,6 +91,10 @@ Provide your own default index! This works great for single page apps,
 as every URL on your site will be redirected to the same HTML file. Every
 instance of `{{entry}}` will be replaced with the entry point of your app.
 
+#### `--localonly`
+
+Only permit requests from/to localhost, '127.0.0.1'.
+
 ## api
 
 ```javascript
