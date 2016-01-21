@@ -15,7 +15,7 @@ it:
 * serves up static files with grace and aplomb (and also appropriate
   mimetypes)
 * is designed to fall away gracefully, as your project gets bigger.
-* love you, unconditionally
+* loves you, unconditionally
 
 ## how do I get it?
 
