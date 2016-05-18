@@ -112,6 +112,31 @@ function testDefaultIndexHandler(test) {
     }
   })
 
+  test('responds with a utf-8 charset', function(assert) {
+    var handler = defaultIndex({
+            generatedIndex: __filename
+        }, {error: logError}, _404)
+      , err = new Error
+      , logged = null
+
+    runServerAndRequest(handler, {accept: 'html'}, function(res, body) {
+      fs.readFile(
+          __filename
+        , 'utf8'
+        , onread
+      )
+
+      function onread(err, str) {
+        assert.equal(res.headers['content-type'], 'text/html; charset=utf-8')
+        assert.end()
+      }
+    })
+
+    function logError(what) {
+      logged = what
+    }
+  })
+
   test('accepts http requests without accept headers', function(assert) {
     var handler = defaultIndex({}, {error: logError}, _404)
       , err = new Error
