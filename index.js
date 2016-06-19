@@ -15,7 +15,7 @@ function beefy(opts, ready) {
     Array.isArray(opts) ? {entries: opts} :
     opts
 
-  opts.cwd = opts.cwd || path.dirname(module.parent)
+  opts.cwd = opts.cwd || path.dirname(module.parent.filename)
   opts.entries = opts.entries || []
   opts.bundlerFlags = opts.bundlerFlags || []
   opts.bundler = opts.bundler || null
@@ -23,7 +23,7 @@ function beefy(opts, ready) {
   opts.live = !!opts.live
   opts.watchify = opts.watchify === undefined ? true : opts.watchify
 
-  var args = ['9999']
+  var args = Array.isArray(opts.entries) ? opts.entries.slice() : []
     , innerHandler
 
   if(opts.cwd) {
