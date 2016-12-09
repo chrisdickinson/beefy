@@ -1,4 +1,5 @@
 # beefy
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/chrisdickinson/beefy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 a local development server designed to work with browserify.
 
