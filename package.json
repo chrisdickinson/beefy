@@ -26,7 +26,7 @@
     "leftpad": "0.0.0",
     "mime": "~1.2.9",
     "minimist": "0.0.8",
-    "open": "0.0.3",
+    "open": "0.0.5",
     "portfinder": "~0.2.1",
     "pretty-bytes": "~0.1.0",
     "readable-stream": "^1.0.27-1",
